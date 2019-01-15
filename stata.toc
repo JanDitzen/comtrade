@@ -1,0 +1,3 @@
+v 3
+d Jan Ditzen, Heriot-Watt University, j.ditzen@hw.ac.uk, jan.ditzen.net
+p comtrade Downloads trade data from UN Comtrade using jsonio and parses the output in a user friendly format.

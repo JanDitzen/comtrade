@@ -1,0 +1,7 @@
+v 3
+d Downloads trade data from UN Comtrade using jsonio and parses the output in a user friendly format.
+d Jan Ditzen, Heriot-Watt University
+d Distribution-Date:  20190115
+f comtrade.ado
+f comtrade.sthlp
+
