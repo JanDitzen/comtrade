@@ -1,6 +1,6 @@
 # comtrade - Downloading trade data from UN Comtrade using jsonio and parsing the output in a user friendly format.
 
-[Syntax](.#Syntax)
+[Syntax](.##Syntax)
 
 ## Syntax
 Contents
