@@ -170,7 +170,9 @@ Option | Description
 
 For example the aim is to download Germany's coal trade with the world in 2017. From the website above, the following url is obtained:
 
-``/api/get?max=500&type=C&freq=A&px=HS&ps=2017&r=276&p=0&rg=all&cc=2701`
+```
+/api/get?max=500&type=C&freq=A&px=HS&ps=2017&r=276&p=0&rg=all&cc=2701
+```
 
 To use the link to download the data, the option **url()** is used. 
 The data is saved in the current workfolder and named _GermanyCoal.dta_:
@@ -324,12 +326,17 @@ rclass | Description
 # 6. About
 
 ### Author
+
 Jan Ditzen (Heriot-Watt University)
+
 Email: j.ditzen@hw.ac.uk
+
 Web: www.jan.ditzen.net
 
 ### Acknowledgement
 
-This program would not have been possible without William Buchanan **jsonio** command. For more information see https://github.com/wbuchanan. Thanks to the [CEERP](https://ceerp.hw.ac.uk/) team for valuable feedback.
+This program would not have been possible without William Buchanan **jsonio** command. For more information see https://github.com/wbuchanan. 
+
+Thanks to the [CEERP](https://ceerp.hw.ac.uk/) team for valuable feedback.
 
 All errors are my own.
