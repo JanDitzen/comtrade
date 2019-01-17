@@ -8,7 +8,7 @@
 
 [Syntax](.#Syntax)
 
-## Syntax
+## Syntax (#Syntax)
 Contents
 
               Syntax
