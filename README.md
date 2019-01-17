@@ -113,26 +113,17 @@ The following parameters need to be set for:
 
 Option | Description
 --- | ---
-**hs(string)** | sets the _px_ parameter, the product classification scheme. Can be HS, H0, H1, H2, H4, H5, ST, S1, S2, S3, S4, BEC or EB02. See the [webpage](https://comtrade.un.org/data/doc/api/#DataRequests") or in Stata `comtrade list' for valid parameters.
-
+**hs(string)** | sets the _px_ parameter, the product classification scheme. Can be HS, H0, H1, H2, H4, H5, ST, S1, S2, S3, S4, BEC or EB02. See the [webpage](https://comtrade.un.org/data/doc/api/#DataRequests") or in Stata `comtrade list` for valid parameters.
 **class(string)** | sets the _cc_ parameter, the detailed product classification code. _string_ can be:  TOTAL (Total trade between reporter and partner, no detail breakdown), AG1, AG2, AG3, AG4, AG5, AG6 and ALL (all codes). AG1 - AG6 are detailed codes at a specific digit level. For instance AG6 in HS gives all of the 6-digit codes, which are the most detailed codes that are internationally comparable. Not all classifications have all digit levels available. See the classification specific codes for more information.
-
 **reportercountry(string)** | sets the _r_ parameter, the reporter country. See list of valid reporters [see](https://comtrade.un.org/data/cache/reporterAreas.json) or in Stata `comtrade list reporter`.
-
 **partnerc:ountry(string)** | sets the _p_ parameter, the partner country. See list of valid partners [see](https://comtrade.un.org/data/cache/partnerAreas.json) or in Stata `comtrade list partner`.
-
 **type(string)** | sets the _type_ parameter, the trade data type. Values can be _C_ for commodities and _S_ for services.
-
 **freq(string)** | sets the _freq_ parameter, the frequency. Valid values are _ A_ for annual and _M_ for monthly.
-
-**traderegime(string)** | sets the _rg_ parameter, the trade regime. Valid values are _all_ for imports and exports, _1_ for imports and _2_ for exports. See valid parameters in 
-[see](https://comtrade.un.org/data/cache/tradeRegimes.json) or in Stata `comtrade list regime`.
-
+**traderegime(string)** | sets the _rg_ parameter, the trade regime. Valid values are _all_ for imports and exports, _1_ for imports and _2_ for exports. See valid parameters [see](https://comtrade.un.org/data/cache/tradeRegimes.json) or in Stata `comtrade list regime`.
 **years(string)** | sets the _ps_ parameter, the time period. Format can be _YYYY_, _YYYYMM_, _now_ or _recent_.
-
 **imts(string)** | data fields/columns based on IMTS Concepts & Definitions. Can be _2010_ for data complying with IMTS 2010 or _orig_ for earlier versions. Is optional.
-
 **maxdata(string)** | sets the _max_ parameter, maximum number of records to be returned.
+
 
 ### **mbs** requests
 
