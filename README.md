@@ -128,8 +128,7 @@ Option | Description
 Option | Description
 --- | ---
 **series_type(string)** | sets the series type. The series type is a combination of the table number, frequency, type of measurement and currency. For a list of possible valid values see [web](https://comtrade.un.org/data/cache/series_type.json) or in Stata `comtrade list mbs series_type`.
-**country_code(string)** | sets the country code. A list of valid codes can be obtained on the [web](https://comtrade.un.org/data/cache/MBSAreas.json)
-or from Stata `comtrade list mbs MBSAreas`.
+**country_code(string)** | sets the country code. A list of valid codes can be obtained on the [web](https://comtrade.un.org/data/cache/MBSAreas.json) or from Stata `comtrade list mbs MBSAreas`.
 **years(string)** | specifies the reference year.
 **table_type** | If option **footnote} is used to obtain footnotes. Then it defines the table for which the footnotes are downloaded. A list is available on the [web](https://comtrade.un.org/data/cache/table_type.json) or from Stata `comtrade list mbs table_type`.
 
@@ -151,16 +150,186 @@ Option | Description
 **variables({varlist})** | obtains only the variables defined in _varlist_. Default is to obtain all variables.
 
 ### General Options
-Options relating how to store the obtained data:
 
 Option | Description
 --- | ---
-**save(string)}** | saves dataset. If option **bulk** is used, then the filename is the name of the zip file. For API calls, _string_ has to contain the filename.
+**save(string)** | saves dataset. If option **bulk** is used, then the filename is the name of the zip file. For API calls, _string_ has to contain the filename.
 **append(string)** | appends and saves dataset.
 **skipzip** | does not unzip the downloaded bulk file. The option applies only if the option **bulk** is used.
 **token(string)** | sets the authorization token. The token can be tested [here](https://comtrade.un.org/ws/CheckRights.aspx) and for further information see [info about authorization](https://comtrade.un.org/api/swagger/ui/index#!/Auth/Auth_Authorize). The token is required for **url()** and **api** calls of a certain size or if there are more than 100 requests per hour. The token is **always** required for bulk downloads.
 **load** | load the obtained dataset into memory.
 **count(integer)** | number of past requests.
 **maxcount(integer)** | maximum number of possible requests per hour. Default is 100.
-
 **starttime(time)** | start time of the first request. Needs to be in the format as saved in **c(current_time)**.
+
+# 4. Examples
+
+### Example 1: build an API call and use url()
+
+**comtrade** can be used to download a pre build URL. The URL can be build on the [comtrade website](https://comtrade.un.org/data/) or in the [API Portal](https://comtrade.un.org/data/dev/portal/)
+
+For example the aim is to download Germany's coal trade with the world in 2017. From the website above, the following url is obtained:
+
+``/api/get?max=500&type=C&freq=A&px=HS&ps=2017&r=276&p=0&rg=all&cc=2701`
+
+To use the link to download the data, the option **url()** is used. 
+The data is saved in the current workfolder and named _GermanyCoal.dta_:
+
+```
+comtrade , url(/api/get?max=500&type=C&freq=A&px=HS&ps=2017&r=276&p=0&rg=all&cc=2701) save("`c(pwd)'/GermanyCoal.dta")
+```
+
+The output will be the following:
+
+```
+Number of observations found in dataset: 2
+File saved: ..../GermanyCoal.dta
+```
+
+Two observations are downloaded and loaded into Stata. One for exports and one for imports.
+
+### Example 2: Directly build an API call
+
+It is possible to download the same data, but if the keys are known, **comtrade** will be able to build the URL itself. For the example above, we need to set the following options:
+
+```
+comtrade api, maxdata(500) type(C) freq(A)  years(2017) reporterc(276) partnerc(0) traderegime(all) hs(HS) cl(2701) save("`c(pwd)'/GermanyCoal.dta")
+```
+
+A maximum number of 500 observations (_maxdata(500)_) of commodities (_type(C)_) of yearly (_freq(A)_) for the year 2017 (_years(2017)_) is downloaded. _reportc_ sets the reporting country and _partnerc_ the partner(s). _traderegime_ specifies that all trade, i.e. export and imports and re-exports and re-imports, for the _HS_ code defined in _cl()_  are obtained.
+
+The output will be the same as before:
+
+```
+Number of observations found in dataset: 2
+File saved: ..../GermanyCoal.dta
+```
+
+### Example 3: Using the records() option#
+
+To use the record function, the option **records()** is added. For example if a list of all downloaded files is to be kept in the workfolder and the filename is _records_and the same request as above is done:
+
+```
+comtrade api, maxdata(500) type(C) freq(A) hs(HS) years(2017) reporterc(276) partnerc(0) traderegime(all) cl(2701) save("`c(pwd)'/GermanyCoal.dta") records("`c(pwd)'/Records.xlsx")
+```
+
+The output is the following:
+
+```
+New data published: 2018-08-23 00:00:00.
+Number of observations found in dataset: 2
+File saved using ..../GermanyCoal.dta
+Record list written to  ..../Records.xlsx
+```
+
+If the same command line from above is called again, **comtrade** will check if data is updated. If not (as it is the case here) it will issue the following messages:
+
+```
+ Getting records from file: ..../Records.xlsx, sheet: api
+ 1 record(s) found.
+ 1 match found.
+ No update available. Both have date: 2018-08-23 00:00:00
+ ```
+
+To download for example peat trade, option **cl()** is changed from **2701** to **2703**. In addition the saved dta should be appended and the download is logged and **api** omitted.
+
+```
+comtrade, maxdata(500) type(C) freq(A) hs(HS) years(2017) reporterc(276) partnerc(0) traderegime(all) cl(2703) append("`c(pwd)'/GermanyCoal.dta") records("`c(pwd)'/Records.xlsx")
+```
+
+The file will be downloaded and a new record added to the Excel file. The output reads:
+
+```
+ Getting records from file: ..../Records.xlsx, sheet: api
+ 1 record(s) found.
+ Number of observations found in dataset: 2
+ File appended using ..../GermanyCoal.dta
+ Record list written to  ..../Records.xlsx
+```
+
+The dataset will have 4 observations, two for each product for both years.
+
+### Example 4: Bulk download
+
+To download a bulk file, the option **bulk** is used. It is not necessary to specify the name of the dta under which the downloaded data is saved. In addition, a authorization token is required.
+
+For example, to download all trade data for Germany in 2017, the following command line is used:
+
+```
+comtrade bulk, type(C) freq(A) hs(HS) years(2017) reporterc(276)  append("`c(pwd)'/GermanyCoalBulk.dta") records("`c(pwd)'/Records.xlsx") token(token)
+```
+
+The output is the following:
+
+```
+ New Series found.
+ New data published: 2018-08-23 00:00:00.
+ File appended using ..../GermanyCoal.dta
+ Record list written to  ..../Records.xlsx
+```
+
+### Example 5: Loop and API download
+
+**comtrade** can be used within a loop over multiple values of a parameter, for example years. For example a loop can be used to retrieve coal trade of Germany for the years 1991 - 2018. If no token is used, then a maximum number of 100 data requests per hour is allowed. **comtrade** can keep track of the number of requests and if the maximum per hour is reached, wait until further requests are allowed. To track the number of requests, the options **starttime()** and **count()** are set. Within the loop, the counter is changed using the value **r(count)**. To save the data the option **append()** is used.
+
+The following code is used (please copy):
+
+```
+ local starttime "`c(current_time)'"
+ local count = 0
+ forvalues year = 1991(1)2018  {
+    comtrade api, append(data) maxdata(500) type(C) freq(A) hs(HS) years(`year') reporterc(276) partnerc(0) traderegime(all) cl(2701) 
+    count(`count') starttime(`starttime')
+    local count = r(count)
+}
+```
+
+### Example 6: Download MBS data
+To download Monthly Bulletin of Statistics ([MBS](https://comtrade.un.org/data/doc/API_MBS)) the function **comtrade mbs** is used. The download requires to set the **series_type()** option, the **year** and **country_type** options. For specifications see the [MBS webpage](https://comtrade.un.org/data/doc/API_MBS). The specifications can be obtain using `comtrade list` as well. The **series_type** parameter contains information about the table number, frequency, type of measurement and currency. To follow the example from the website, the following command line is used:
+
+```
+comtrade mbs , series_type("T35.A.V.$") country_code(842) year(2015)
+```
+
+To download footnotes, the option **footnote** is used. For the footnote, the options **table_type()** is required.
+
+```
+comtrade mbs , footnote table_type("T35")
+```
+
+### Example 7: List and download possible parameters
+
+**comtrade** offers to download all possible values for parameters, such as country codes, classification codes,.... To obtain those, **comtrade** is called with the parameter **list**:
+
+```
+comtrade list
+```
+
+# 5. Stored Values
+
+The following values are stored in **r()**:
+rclass | Description
+---|---
+**r(validation)**|Validation Code
+**r(count)**|Number of requests
+**r(StartTime)**|Time of first request
+**r(PublicationDate)**|Publication date (earliest)
+**r(NumRecords)**|Number of records
+**r(FileSize)**|Size of file on disk
+**r(Filename)**|Filename of saved dta
+**r(uri)**|URL to request
+**r(downloaded)**|0 if no data downlaoded, 1 if data downloaded.
+
+
+# 6. About
+
+### Author
+Jan Ditzen (Heriot-Watt University)
+Email: j.ditzen@hw.ac.uk
+Web: www.jan.ditzen.net
+
+### Acknowledgement
+
+This program would not have been possible without William Buchanan **jsonio** command. For more information see https://github.com/wbuchanan. Thanks to the [CEERP](https://ceerp.hw.ac.uk/) team for valuable feedback.
+
+All errors are my own.
