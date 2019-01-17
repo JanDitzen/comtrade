@@ -97,19 +97,22 @@ Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables
 It is possible to build a query using the [webinterace](https://comtrade.un.org/data/). This is essentially an API call and can be used using the **url()** option.
 
 **comtrade** downloads the requested data and loads it into Stata.
+# 3. Options
 
-              Non url() requests
+### Non url() requests
 
-              If url is not used, then the depending if bulk, api or mbs is used, several options are required to build a
-                  request.  A comtrade request is an url which looks for an API call looks like -
-                  https://comtrade.un.org/api//refs/da/view?parameters - for more details see Comtrade API Parameters.
+If url is not used, then the depending if bulk, api or mbs is used, several options are required to build a rrquest. A comtrade request is an url which looks for an API call looks like
+`https://comtrade.un.org/api//refs/da/view?parameter`
+for more details see Comtrade API Parameters.
 
-              The following parameters need to be set for:
+The following parameters need to be set for:
 
-              api and bulk requests
+### api and bulk requests
 
-              hs(string) sets the px parameter, the product classification scheme.  Can be HS, H0, H1, H2, H4, H5, ST, S1,
-                  S2, S3, S4, BEC or EB02.  See the webpage or Stata for valid parameters.
+Option | Description
+--- | ---
+hs(string) | sets the px parameter, the product classification scheme.  Can be HS, H0, H1, H2, H4, H5, ST, S1, S2, S3, S4, BEC or EB02.  See the webpage or Stata for valid parameters.
+
 
               class(string) sets the cc parameter, the detailed product classification code. string can be:  TOTAL (Total
                   trade between reporter and partner, no detail breakdown), AG1, AG2, AG3, AG4, AG5, AG6 and ALL (all
