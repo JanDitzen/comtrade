@@ -1,34 +1,26 @@
 # comtrade 
 ## Downloading trade data from UN Comtrade using jsonio and parsing the output in a user friendly format.
+
 __Table of Contents__
 1. [Syntax](#1-syntax)
+2. [Introduction](#2-introduction)
+3. [Options](#3-options)
+4. [Examples](#4-examples)
+5. [Stored Values](#5-stored values)
+6. [About](#6-about)
 
+# 1. Syntax
+The general syntax is:
 
-## 1. Syntax
-Contents
+  `comtrade [api|bulk|mbs|list] , specific_options general_options'
 
-              Syntax
-              Introduction
-              Options
-              Examples
-              Stored Values
-              About
+where api is the default and specific_options depend on api|bulk|mbs|list.
 
+To download api data (default):
 
-          Syntax
-
-              The general syntax is:
-
-                comtrade [api|bulk|mbs|list] , specific_options general_options
-
-              where api is the default and specific_options depend on api|bulk|mbs|list.
-
-              To download api data (default):
-
-                comtrade [api] , hs(string) class(string) reportercountry(string) partnercountry(string) maxdata(string)
-                       type(string) freq(string) years(string) traderegime(string) [ imts(string) general options ]
-
-              To download bulk data:
+  `comtrade [api] , hs(string) class(string) reportercountry(string) partnercountry(string) maxdata(string)
+                       type(string) freq(string) years(string) traderegime(string) [ imts(string) general options ]`
+To download bulk data:
 
                 comtrade bulk , hs(string) reportcountry(string) type(string) freq(string) years(string) [ skipzip general
                        options ]
