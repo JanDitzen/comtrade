@@ -67,20 +67,20 @@ For more information see the autors website or the help page for StataJSON.
 Comtrade offers data in four different ways, via a bulk download, an API call or a web address. **comtrade** can retrieve data from all of those, but validates the request first. In addition it can download data from the Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables of International Trade Statistics Yearbook (ITSY) including footnotes.
 
 
-## Validation
+### Validation
 
 As a first step **comtrade** validates the data request (see [api](https://comtrade.un.org/data/doc/api/#APIKey) and [bulk](https://comtrade.un.org/data/doc/api/bulk/#DataRequests)). Within this step, if the option **records()** is used, it is possible to cross-check if data was updated and only perform the data request if data online was updated. **records()** saves an xlsx file with details of the validation. The results from the validation are saved as variables starting with **_varname**. 
 The following results are stored: information about the request, publication date, indicator if data is original and number of records.
 
 
-## API Calls
+### API Calls
 
 API calls allow to download a specific reportercountry, classification, partnercountry and year combination. For more information, the necessary parameters see the [documentation](https://comtrade.un.org/data/doc/api/).
 
 **comtrade** validates and downloads the data and brings it in a user friendly format. Under the free version, comtrade restricts the number of hourly requests. **comtrade** can keep track of those and pause Stata and continue if necessary.
 
 
-## bulk downloads
+### bulk downloads
 
 Large quantities of data can be obtained using a _bulk_ download ([see for more information](https://comtrade.un.org/data/doc/api/bulk/)). Bulk downloads contain all partner trade data for a given year, reportercountry and trade code. 
 Bulk downloads are downloaded in a zip file and only available to authorized users. 
@@ -97,13 +97,15 @@ Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables
 It is possible to build a query using the [webinterace](https://comtrade.un.org/data/). This is essentially an API call and can be used using the **url()** option.
 
 **comtrade** downloads the requested data and loads it into Stata.
+
+
 # 3. Options
 
 ### Non url() requests
 
-If url is not used, then the depending if bulk, api or mbs is used, several options are required to build a rrquest. A comtrade request is an url which looks for an API call looks like
+If url is not used, then the depending if bulk, api or mbs is used, several options are required to build a request. A comtrade request is an url which looks for an API call looks like
 `https://comtrade.un.org/api//refs/da/view?parameter`
-for more details see Comtrade API Parameters.
+for more details see for more details see [Comtrade API Parameters](https://comtrade.un.org/data/doc/api/#DataRequests).
 
 The following parameters need to be set for:
 
@@ -111,24 +113,28 @@ The following parameters need to be set for:
 
 Option | Description
 --- | ---
-hs(string) | sets the px parameter, the product classification scheme.  Can be HS, H0, H1, H2, H4, H5, ST, S1, S2, S3, S4, BEC or EB02.  See the webpage or Stata for valid parameters.
+**hs(string)** | sets the _px_ parameter, the product classification scheme. Can be HS, H0, H1, H2, H4, H5, ST, S1, S2, S3, S4, BEC or EB02. See the [webpage](https://comtrade.un.org/data/doc/api/#DataRequests") or in Stata `comtrade list' for valid parameters.
 
+**class(string)** | sets the _cc_ parameter, the detailed product classification code. _string_ can be:  TOTAL (Total trade between reporter and partner, no detail breakdown), AG1, AG2, AG3, AG4, AG5, AG6 and ALL (all codes). AG1 - AG6 are detailed codes at a specific digit level. For instance AG6 in HS gives all of the 6-digit codes, which are the most detailed codes that are internationally comparable. Not all classifications have all digit levels available. See the classification specific codes for more information.
 
-              class(string) sets the cc parameter, the detailed product classification code. string can be:  TOTAL (Total
-                  trade between reporter and partner, no detail breakdown), AG1, AG2, AG3, AG4, AG5, AG6 and ALL (all
-                  codes).  AG1 - AG6 are detailed codes at a specific digit level.  For instance AG6 in HS gives all of
-                  the 6-digit codes, which are the most detailed codes that are internationally comparable.  Not all
-                  classifications have all digit levels available.  See the classification specific codes for more
-                  information.
+**reportercountry(string)** | sets the _r_ parameter, the reporter country. See list of valid reporters [see](https://comtrade.un.org/data/cache/reporterAreas.json) or in Stata `comtrade list reporter`.
 
-              reportercountry(string) sets the r parameter, the reporter country.  See list of valid reporters in web or
-                  in Stata.
+**partnerc:ountry(string)** | sets the _p_ parameter, the partner country. See list of valid partners [see](https://comtrade.un.org/data/cache/partnerAreas.json) or in Stata `comtrade list partner`.
 
-              partnercountry(string) sets the p parameter, the partner country.  See list of valid partners web or in
-                  Stata
+**type(string)** | sets the _type_ parameter, the trade data type. Values can be _C_ for commodities and _S_ for services.
 
-              type(string) sets the type parameter, the trade data type. Values can be C for commodities and S for
-                  services.
+**freq(string)** | sets the _freq_ parameter, the frequency. Valid values are _ A_ for annual and _M_ for monthly.
+
+**traderegime(string)** | sets the _rg_ parameter, the trade regime. Valid values are _all_ for imports and exports, _1_ for imports and _2_ for exports. See valid parameters in 
+[see](https://comtrade.un.org/data/cache/tradeRegimes.json) or in Stata `comtrade list regime`.
+
+**years(string)** | sets the _ps_ parameter, the time period. Format can be _YYYY_, _YYYYMM_, _now_ or _recent_.
+
+**imts(string)** | data fields/columns based on IMTS Concepts & Definitions. Can be _2010_ for data complying with IMTS 2010 or _orig_ for earlier versions. Is optional.
+
+**maxdata(string)** | sets the _max_ parameter, maximum number of records to be returned.
+
+### **mbs** requests
 
               freq(string) sets the freq parameter, the frequency. Valid values are A for annual and M for monthly.
 
