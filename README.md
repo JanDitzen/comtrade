@@ -308,6 +308,7 @@ comtrade list
 # 5. Stored Values
 
 The following values are stored in **r()**:
+
 rclass | Description
 ---|---
 **r(validation)**|Validation Code
@@ -319,7 +320,6 @@ rclass | Description
 **r(Filename)**|Filename of saved dta
 **r(uri)**|URL to request
 **r(downloaded)**|0 if no data downlaoded, 1 if data downloaded.
-
 
 # 6. About
 
