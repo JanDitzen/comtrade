@@ -12,86 +12,65 @@ __Table of Contents__
 # 1. Syntax
 The general syntax is:
 
-  `comtrade [api|bulk|mbs|list] , specific_options general_options'
+```
+comtrade [api|bulk|mbs|list] , specific_options general_options
+```
 
 where api is the default and specific_options depend on api|bulk|mbs|list.
 
 To download api data (default):
 
-  `comtrade [api] , hs(string) class(string) reportercountry(string) partnercountry(string) maxdata(string)
-                       type(string) freq(string) years(string) traderegime(string) [ imts(string) general options ]`
+```
+comtrade [api] , hs(string) class(string) reportercountry(string) partnercountry(string) maxdata(string) type(string) freq(string) years(string) traderegime(string) [ imts(string) general options ]
+```
+
 To download bulk data:
 
-                comtrade bulk , hs(string) reportcountry(string) type(string) freq(string) years(string) [ skipzip general
-                       options ]
+```
+comtrade bulk , hs(string) reportcountry(string) type(string) freq(string) years(string) [ skipzip general options ]
+```
 
-              To download Monthly Bulletin of Statistics (MBS) and Analytical Trade Tables and World Tables of
-                       International Trade Statistics Yearbook (ITSY):
+To download Monthly Bulletin of Statistics (MBS) and Analytical Trade Tables and World Tables of International Trade Statistics Yearbook (ITSY):
 
-                comtrade mbs , series_type(string) years(string) country_code(string) | footnote table_type(string)
+```
+comtrade mbs , series_type(string) years(string) country_code(string) | footnote table_type(string)
+```
 
-              To download data from a specified url:
+To download data from a specified url:
 
-                comtrade , url(string) [ general options ]
+```
+comtrade , url(string) [ general options ]
+```
 
-              general options are:
+general options are:
 
-                comtrade , ....  token(string) variables(string) load force nocheck onlyvalidation showvalidation
-                       save(filename) records(filename) count(integer) maxcount(integer) starttime(time)
+```
+comtrade , ....  token(string) variables(string) load force nocheck onlyvalidation showvalidation save(filename) records(filename) count(integer) maxcount(integer) starttime(time)
+```
 
-              To download possible parameters for reportercountry, partnercountry, class:
+To download possible parameters for reportercountry, partnercountry, class:
 
-                comtrade list, [listall]
+```
+comtrade list, [listall]
+```
 
-              William Buchanan's jsonio needs to be installed for the use of comtrade.  Please install from:
-                     net install jsonio, from(https://wbuchanan.github.io/StataJSON) replace
-              For more information see the autors website or the help page for StataJSON.
+William Buchanan's jsonio needs to be installed for the use of comtrade.  Please install from:
+```
+net install jsonio, from(https://wbuchanan.github.io/StataJSON) replace
+```
 
-          Introduction
+For more information see the autors website or the help page for StataJSON.
 
-              comtrade downloads trade data from UN Comtrade.  Comtrade trade data is available in the JSON (JavaScript
-              Object Notation) format.  comtrade uses the user written command jsonio to download the data in the JSON
-              format, it then parsesthe retrieved data bringing it in into an user friendly format.
+# 2. Introduction
+**comtrade** downloads trade data from [UN Comtrade](https://comtrade.un.org/). Comtrade trade data is available in the JSON (JavaScript Object Notation) format. **comtrade** uses the user written command jsonioto download the data in the JSON format, it then parses the retrieved data bringing it in into an user friendly format.
 
-              Comtrade offers data in four different ways, via a bulk download, an API call or a webadress.  comtrade can
-              retrieve data from all of those, but validates the request first.  In addition it can downlaod data from the
-              Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables of International Trade
-              Statistics Yearbook (ITSY) including footnotes.
+Comtrade offers data in four different ways, via a bulk download, an API call or a web address. **comtrade** can retrieve data from all of those, but validates the request first. In addition it can download data from the Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables of International Trade Statistics Yearbook (ITSY) including footnotes.
 
-              Validation
-              As a first step comtrade validates the data request (see api and bulk).  Within this step, if the option
-              records() is used, it is possible to cross-check if data was updated and only peform the data request if
-              data online was updated.  records() saves an xlsx file with details of the validation.  The results from the
-              validation are saved as variables starting with _varname.  The following results are stored: informations
-              about the request, publication date, indicator if data is original and number of records.
+## Validation
 
-              API Calls
-              API calls allow to download a specific reportcountry, classification, partnercountry and year combination.
-              For more information, the necessary parameters see the documentation.
-              comtrade validates and downloads the data and brings it in a user friendly format.  Under the free version,
-              comtrade restricts the number of hourly requests.  comtrade can keep track of those and pause Stata and
-              continue if necessary.
+As a first step **comtrade** validates the data request (see [api](https://comtrade.un.org/data/doc/api/#APIKey) and [bulk](https://comtrade.un.org/data/doc/api/bulk/#DataRequests)). Within this step, if the option **records()** is used, it is possible to cross-check if data was updated and only perform the data request if data online was updated. **records()** saves an xlsx file with details of the validation. The results from the validation are saved as variables starting with **_varname**. 
+The following results are stored: information about the request, publication date, indicator if data is original and number of records.
 
-              bulk downloads
-              Large quantities of data can be obtained using a bulk download (see for more information).  Bulk downloads
-              contain all partner trade data for a given year, reportcountry and trade code.  Bulk downloads are
-              downloaded in a zip file and only available to authorized users.  For informations about pricing see UN
-              Comtrade Shop.
-              comtrade downloads the zip file, extracts it, saves it as a dta and opens it in Stata.
-
-              mbs downloads
-              Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables of International Trade
-              Statistics Yearbook (ITSY) including footnotes can be downloaded as well.  For a description of the data see
-              the MBS webpage.  The download of footnotes is possible as well.  There is no validation for mbs requests
-              necessary.
-
-              url downloads
-              It is possible to build a query using the webinterface.  This is essentially an API call and can be used
-              using the url() option.
-              comtrade downloads the requested data and loads it into Stata.
-
-
-          Options
 
               Non url() requests
 
