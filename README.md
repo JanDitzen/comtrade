@@ -1,11 +1,9 @@
-          ----------------------------------------------------------------------------------------------------------------
-          help comtrade                                                                              v. 1.0 - January 2019
-          ----------------------------------------------------------------------------------------------------------------
-          Title
+# comtrade - Downloading trade data from UN Comtrade using jsonio and parsing the output in a user friendly format.
 
-              comtrade - Downloads trade data from Comtrade using jsonio and parses the output in a user friendly format.
+[Syntax](.#Syntax)
 
-          Contents
+## Syntax
+Contents
 
               Syntax
               Introduction
