@@ -66,11 +66,37 @@ For more information see the autors website or the help page for StataJSON.
 
 Comtrade offers data in four different ways, via a bulk download, an API call or a web address. **comtrade** can retrieve data from all of those, but validates the request first. In addition it can download data from the Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables of International Trade Statistics Yearbook (ITSY) including footnotes.
 
+
 ## Validation
 
 As a first step **comtrade** validates the data request (see [api](https://comtrade.un.org/data/doc/api/#APIKey) and [bulk](https://comtrade.un.org/data/doc/api/bulk/#DataRequests)). Within this step, if the option **records()** is used, it is possible to cross-check if data was updated and only perform the data request if data online was updated. **records()** saves an xlsx file with details of the validation. The results from the validation are saved as variables starting with **_varname**. 
 The following results are stored: information about the request, publication date, indicator if data is original and number of records.
 
+
+## API Calls
+
+API calls allow to download a specific reportercountry, classification, partnercountry and year combination. For more information, the necessary parameters see the [documentation](https://comtrade.un.org/data/doc/api/).
+
+**comtrade** validates and downloads the data and brings it in a user friendly format. Under the free version, comtrade restricts the number of hourly requests. **comtrade** can keep track of those and pause Stata and continue if necessary.
+
+
+## bulk downloads
+
+Large quantities of data can be obtained using a _bulk_ download ([see for more information](https://comtrade.un.org/data/doc/api/bulk/)). Bulk downloads contain all partner trade data for a given year, reportercountry and trade code. 
+Bulk downloads are downloaded in a zip file and only available to authorized users. 
+For information about pricing see [UN Comtrade Shop](https://shop.un.org/comtrade).
+
+**comtrade** downloads the zip file, extracts it, saves it as a dta and opens it in Stata.
+
+
+## mbs downloads
+
+Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables of International Trade Statistics Yearbook (ITSY) including footnotes can be downloaded as well. For a description of the data see the [MBS webpage]("https://comtrade.un.org/data/doc/API_MBS). The download of footnotes is possible as well. There is no validation for **mbs** requests necessary.
+
+## url downloads
+It is possible to build a query using the [webinterace](https://comtrade.un.org/data/). This is essentially an API call and can be used using the **url()** option.
+
+**comtrade** downloads the requested data and loads it into Stata.
 
               Non url() requests
 
