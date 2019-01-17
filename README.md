@@ -1,19 +1,10 @@
 # comtrade 
 ## Downloading trade data from UN Comtrade using jsonio and parsing the output in a user friendly format.
+__Table of Contents__
+1. [Syntax](#1-syntax)
 
-[Syntax](.##syntax)
 
-[Syntax](##syntax)
-
-[Syntax](#syntax)
-
-[Syntax](./README#syntax)
-
-[Syntax](./README##syntax)
-
-[Syntax](/#syntax)
-
-## Syntax (#syntax)
+## 1. Syntax
 Contents
 
               Syntax
