@@ -13,7 +13,7 @@ __Table of Contents__
 The general syntax is:
 
 ```
-comtrade [api|bulk|mbs|list] , specific_options general_options
+comtrade [api bulk mbs list] , specific_options general_options
 ```
 
 where api is the default and specific_options depend on api|bulk|mbs|list.
