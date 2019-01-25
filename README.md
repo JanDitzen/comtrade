@@ -62,7 +62,7 @@ net install jsonio, from(https://wbuchanan.github.io/StataJSON) replace
 For more information see the autors website or the help page for StataJSON.
 
 # 2. Introduction
-**comtrade** downloads trade data from [UN Comtrade](https://comtrade.un.org/). Comtrade trade data is available in the JSON (JavaScript Object Notation) format. **comtrade** uses the user written command jsonioto download the data in the JSON format, it then parses the retrieved data bringing it in into an user friendly format.
+**comtrade** downloads trade data from [UN Comtrade](https://comtrade.un.org/). Comtrade trade data is available in the JSON (JavaScript Object Notation) format. **comtrade** uses the user written command jsonio to download the data in the JSON format, it then parses the retrieved data bringing it in into an user friendly format.
 
 Comtrade offers data in four different ways, via a bulk download, an API call or a web address. **comtrade** can retrieve data from all of those, but validates the request first. In addition it can download data from the Monthly Bulletin of Statistics (MBS) of Analytical Trade Tables and World Tables of International Trade Statistics Yearbook (ITSY) including footnotes.
 
