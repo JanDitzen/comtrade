@@ -99,7 +99,7 @@ or the help page for {browse "https://github.com/wbuchanan/StataJSON":StataJSON}
 Comtrade trade data is available in the JSON (JavaScript Object Notation) format.
 {cmd:comtrade} uses the user written command {help jsonio} to download the data in the JSON 
 format, 
-it then parsesthe retrieved data bringing it in into an user friendly format.{p_end}
+it then parses the retrieved data bringing it in into an user friendly format.{p_end}
 
 {p 4 4}Comtrade offers data in four different ways, via a bulk download, an API call
 or a webadress.
