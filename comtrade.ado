@@ -1,6 +1,6 @@
-*! comtrade version 1.0
+*! comtrade version 1.01
 *! Jan Ditzen
-*! 2018
+*! 2019
 
 program define comtrade, rclass
 	syntax [anything ], [ 						///
@@ -538,7 +538,7 @@ program define comtrade, rclass
 					
 									
 					
-					comtrade , `cmd'
+					comtrade `cmd'
 					
 					
 				}
