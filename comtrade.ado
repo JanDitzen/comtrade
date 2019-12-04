@@ -1,4 +1,4 @@
-*! comtrade version 1.01
+*! comtrade version 1.02
 *! Jan Ditzen
 *! 2019
 
@@ -606,16 +606,18 @@ program define comtrade, rclass
 					
 					** merge with validation dataset
 					if "`check'" == "" {
-						merge m:1 period rtCode using `validation'
-						
-						** make sure all data matched
-						capture assert _merge == 3
-						
-						if _rc != 0 {
-							noi disp "Some validation data was not able to be matched to downloaded data!"
+						if "`validation'" != "" {
+							merge m:1 period rtCode using `validation'
+							
+							** make sure all data matched
+							capture assert _merge == 3
+							
+							if _rc != 0 {
+								noi disp "Some validation data was not able to be matched to downloaded data!"
+							}
+							drop _merge
+							gen _DownloadDate = "`c(current_time)' `c(current_date)'"
 						}
-						drop _merge
-						gen _DownloadDate = "`c(current_time)' `c(current_date)'"
 					}
 					capture drop yr group
 					if "`append'" != "" {
