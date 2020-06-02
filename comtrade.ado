@@ -1,6 +1,6 @@
-*! comtrade version 1.02
+*! comtrade version 1.03
 *! Jan Ditzen
-*! 2019
+*! June 2020
 
 program define comtrade, rclass
 	syntax [anything ], [ 						///
@@ -89,7 +89,7 @@ program define comtrade, rclass
 					mata classtypes = ("HS as reported","HS 1992","HS 1996","HS 2002","HS 2007","HS 2012","SITC as reported","SITC Rev. 1","SITC Rev. 2","SITC Rev. 3","SITC Rev. 4","Broad Econ. Cat. (BEC)","Extended Balance of paym.")
 					local i = 4
 					foreach type in HS H0 H1 H2 H3 H4 ST S1 S2 S3 S4 BEC EB02 {
-						mata st_local("strType",classtypes[`i'-2])
+						mata st_local("strType",classtypes[`i'-3])
 						if `i' < 10 {
 							local col "4"
 						}
